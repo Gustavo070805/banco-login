@@ -1,7 +1,9 @@
+</html>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,27 +18,27 @@
 
     <main class="container">
 
-        <form>
+        <form onsubmit="criarConta(event)">
 
             <h1>Criar Conta</h1>
 
             <div class="input-box">
-                <input type="text" placeholder="Nome completo" required>
+                <input id="nome" type="text" placeholder="Nome completo" required>
                 <i class='bx bxs-user'></i>
             </div>
 
             <div class="input-box">
-                <input type="email" placeholder="Email" required>
+                <input id="email" type="email" placeholder="Email" required>
                 <i class='bx bxs-envelope'></i>
             </div>
 
             <div class="input-box">
-                <input type="password" placeholder="Senha" required>
+                <input id="senha" type="password" placeholder="Senha" required>
                 <i class='bx bxs-lock-alt'></i>
             </div>
 
             <div class="input-box">
-                <input type="password" placeholder="Confirmar senha" required>
+                <input id="confirmar" type="password" placeholder="Confirmar senha" required>
                 <i class='bx bxs-lock'></i>
             </div>
 
@@ -50,6 +52,54 @@
 
     </main>
 
+
+    <script src="auth.js"></script>
+
+    <script>
+
+        function criarConta(event) {
+
+            event.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+            const confirmar = document.getElementById("confirmar").value;
+
+            if (senha !== confirmar) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            cadastrarUsuario(nome, email, senha);
+
+        }
+
+    </script>
+
 </body>
 
 </html>
+<script src="auth.js"></script>
+
+<script>
+
+    function criarConta(event) {
+
+        event.preventDefault();
+
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
+        const confirmar = document.getElementById("confirmar").value;
+
+        if (senha !== confirmar) {
+            alert("As senhas não coincidem!");
+            return;
+        }
+
+        cadastrarUsuario(nome, email, senha);
+
+    }
+
+</script>

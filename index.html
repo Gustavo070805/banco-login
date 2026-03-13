@@ -47,9 +47,23 @@
                 <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
                 <p>
             </div>
+            <script src="auth.js"></script>
 
-        </form>
+            <script>
 
+                function entrar(event) {
+
+                    event.preventDefault();
+
+                    const email = document.getElementById("email").value;
+                    const senha = document.getElementById("senha").value;
+
+                    loginUsuario(email, senha);
+
+                }
+
+            </script>
+            <form onsubmit="entrar(event)">
     </main>
 
 </body>

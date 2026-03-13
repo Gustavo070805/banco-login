@@ -1,59 +1,46 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+function cadastrarUsuario(nome, email, senha) {
 
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    sendPasswordResetEmail
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
+    const existe = usuarios.find(u => u.email === email);
 
-const firebaseConfig = {
-    apiKey: "SUA_KEY",
-    authDomain: "SEU_DOMINIO",
-    projectId: "SEU_PROJETO",
-    storageBucket: "SEU_BUCKET",
-    messagingSenderId: "SEU_ID",
-    appId: "SEU_APP_ID"
-};
+    if (existe) {
+        alert("Este email já está cadastrado!");
+        return;
+    }
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+    usuarios.push({
+        nome: nome,
+        email: email,
+        senha: senha
+    });
 
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-// CADASTRO
-window.cadastrar = function (email, senha) {
-    createUserWithEmailAndPassword(auth, email, senha)
-        .then(() => {
-            alert("Conta criada com sucesso!");
-            window.location.href = "index.html";
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
+    alert("Conta criada com sucesso!");
+
+    window.location.href = "index.html";
+
 }
 
 
-// LOGIN
-window.login = function (email, senha) {
-    signInWithEmailAndPassword(auth, email, senha)
-        .then(() => {
-            alert("Login realizado!");
-            window.location.href = "home.html";
-        })
-        .catch((error) => {
-            alert("Email ou senha incorretos");
-        });
-}
 
+function loginUsuario(email, senha) {
 
-// RECUPERAR SENHA
-window.recuperarSenha = function (email) {
-    sendPasswordResetEmail(auth, email)
-        .then(() => {
-            alert("Email de recuperação enviado!");
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+    if (usuario) {
+
+        alert("Login realizado!");
+
+        window.location.href = "home.html";
+
+    } else {
+
+        alert("Email ou senha incorretos");
+
+    }
+
 }
